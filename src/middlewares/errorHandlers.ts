@@ -7,7 +7,7 @@ export const notFoundHandler = (req: Request, res: Response, next: NextFunction)
 };
 
 export const errorHandler = (error: HttpException, req: Request, res: Response, next: NextFunction) => {
-  const status = error.status || 500;
+  const status = error.statusCode || 500;
   const message = error.message || 'Something went wrong';
 
   res.status(status).json({
@@ -15,3 +15,4 @@ export const errorHandler = (error: HttpException, req: Request, res: Response, 
     message,
   });
 };
+
