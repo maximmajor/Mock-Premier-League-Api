@@ -1,6 +1,6 @@
 
-import IAccount from '../interfaces/account';
-import accountModel from '../models/account';
+import IAccount from '../interfaces/accountInterface';
+import accountModel from '../models/accountModel';
 
 class accountRepository {
     public accountModel = accountModel;
@@ -11,8 +11,7 @@ class accountRepository {
         return signUpAccount
     }
 
-
-
+    
     public async findAllAccounts(): Promise<IAccount[]> {
         const getAllAccounts = await this.accountModel.find().exec();
         return getAllAccounts;
@@ -29,13 +28,19 @@ class accountRepository {
         return getAccountByEmail!;
     }
 
-    public async findAllAdmin(accountId: string): Promise<IAccount> {
-        const getAccountByEmail = await this.accountModel.findOne({ _id: accountId, isAdmin: true }).exec();
+    public async findAccountByUserName(userName: string): Promise<IAccount> {
+        const getAccountByuserName = await this.accountModel.findOne({ userName: userName }).exec();
+        return getAccountByuserName!;
+    }
+
+
+    public async findAllAdmin(): Promise<IAccount[]> {
+        const getAccountByEmail = await this.accountModel.find({  isAdmin: true }).exec();
         return getAccountByEmail!;
     }
 
-    public async findAllNoneAdmin(accountId: string): Promise<IAccount> {
-        const getAccountByEmail = await this.accountModel.findOne({ _id: accountId, isAdmin: false }).exec();
+    public async findAllNoneAdmin(): Promise<IAccount[]> {
+        const getAccountByEmail = await this.accountModel.find({ isAdmin: false }).exec();
         return getAccountByEmail!;
     }
 

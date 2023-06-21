@@ -5,7 +5,7 @@ import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import { errorHandler, notFoundHandler } from '../middlewares/errorHandlers';
 import rateLimitErrorHandler from '../middlewares/rateLimiterError';
-import accountRoutes from '../routes/account'
+import accountRoutes from '../routes/accountRoute'
 
 function createServer() {
     const app = express();

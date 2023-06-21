@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import accountService from '../services/account';
-import IAccount from '../interfaces/account';
+import accountService from '../services/accountService';
+import IAccount from '../interfaces/accountInterface';
 import { HttpException } from '../middlewares/HttpException';
 
 class accountController {
@@ -25,6 +25,50 @@ class accountController {
         }
     };
 
+    public login = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const { email, password, ...otherFields } = req.body;
+            // Check if there are any other fields present in the request body
+            if (Object.keys(otherFields).length > 0) {
+              const errorMessage = 'Invalid fields in request body. Only email and password are allowed.';
+               res.status(400).json({ error: errorMessage });
+               return
+            }
+
+            const token = await this.accountService.login(email, password);
+            if (!token) {
+                res.status(401).json({ message: 'Invalid credentials' });
+                return;
+            }
+            res.status(200).json({ token });
+        } catch (error) {
+            if (error instanceof HttpException) {
+                const { statusCode, message } = error;
+                res.status(statusCode).json({ message });
+            } else {
+                res.status(500).json({ message: 'Internal Server Error' });
+            }
+        }
+    };
+
+    public getAuthAccount = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const accountId = req.user
+            const getAuthAccount = await this.accountService.getAuthAccount(accountId);
+            if (!getAuthAccount) {
+                res.status(401).json({ message: 'Account Not Found' });
+                return;
+            }
+            res.status(200).json({ getAuthAccount });
+        } catch (error) {
+            if (error instanceof HttpException) {
+                const { statusCode, message } = error;
+                res.status(statusCode).json({ message });
+            } else {
+                res.status(500).json({ message: 'Internal Server Error' });
+            }
+        }
+    };
 
     public getAllAccounts = async (req: Request, res: Response): Promise<void> => {
         try {
@@ -61,8 +105,7 @@ class accountController {
 
     public getAllNoneAdmin = async (req: Request, res: Response): Promise<void> => {
         try {
-            const { accountId } = req.params;
-            const account = await this.accountService.getAllNoneAdmin(accountId);
+            const account = await this.accountService.getAllNoneAdmin();
             if (!account) {
                 res.status(404).json({ message: 'account not found' });
             } else {
@@ -77,13 +120,10 @@ class accountController {
             }
         }
     };
-
-
 
     public getAllAdmin = async (req: Request, res: Response): Promise<void> => {
         try {
-            const { accountId } = req.params;
-            const account = await this.accountService.getAllAdmin(accountId);
+            const account = await this.accountService.getAllAdmin();
             if (!account) {
                 res.status(404).json({ message: 'account not found' });
             } else {
@@ -98,13 +138,16 @@ class accountController {
             }
         }
     };
-
-
 
     public updateAccount = async (req: Request, res: Response): Promise<void> => {
         console.log(req.params.args)
         try {
-            const { accountId } = req.params;
+            const accountId = req.user
+            const getAuthAccount = await this.accountService.getAuthAccount(accountId);
+            if (!getAuthAccount) {
+                res.status(401).json({ message: 'Account Not Found' });
+                return;
+            }
             const updateData: Partial<IAccount> = req.body;
             const updatedAccount = await this.accountService.updateAccount(accountId, updateData);
             if (!updatedAccount) {

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import accountModel from '../models/account';
+import accountModel from '../models/accountModel';
 import { HttpException } from './HttpException';
 
 
