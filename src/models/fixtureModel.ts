@@ -22,11 +22,19 @@ const fixtureSchema = new mongoose.Schema<IFixture>(
             ref: 'team',
             required: true,
           },
+          scores: {
+            team1: {
+                type: Number,
+            },
+            team2: {
+                type: Number,
+            }
+          },
           date: {
-            type: Date,
+            type: String,
             required: true,
           },
-          completed: {
+          status: {
             type: String,
             default: 'Pending',
           },

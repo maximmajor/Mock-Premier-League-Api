@@ -1,35 +1,39 @@
 import express, { Router } from 'express';
-import accountController from '../controllers/accountController';
+import fixtureController from '../controllers/fixtureController';
 import authenticate from '../middlewares/authentication';
-import validateRequestBody from '../middlewares/validateRequestBody';
+import authorization from '../middlewares/authorization';
 
 const router: Router = express.Router();
-const AccountController = new accountController();
+const FixtureController = new fixtureController();
 
 
 
-// Create a new account
-router.post('/create', validateRequestBody, AccountController.createAccount);
+// Create a new Fixture
+router.post('/create', authenticate, authorization,  FixtureController.createFixture);
 
-// Login account
-router.post('/login', AccountController.login);
 
-// Authenticate account
-router.get('/', authenticate, AccountController.getAuthAccount);
+// Authenticate Fixture
+router.get('/', authenticate, FixtureController.getAllFixtures);
 
-// Get all accounts
-router.get('/all', AccountController.getAllAccounts);
+// pending Fixture
+router.get('/all/pending', authenticate, FixtureController.getPendingFixtures);
 
-// Get an account by ID
-router.get('/:accountId', AccountController.getAccountById);
 
-// Get all admin
-router.get('/all/admin', AccountController.getAllAdmin);
+// completed Fixture
+router.get('/all/completed', authenticate, FixtureController.getCompletedFixtures);
 
-// Get all None Admin
-router.get('/none/admin', AccountController.getAllNoneAdmin);
 
-// Update a account
-router.put('/', authenticate, AccountController.updateAccount);
+// Get an Fixture by Account ID
+router.get('/:FixtureId',  authenticate, FixtureController.getFixtureById);
 
+
+// Get an Fixture by Account ID
+router.get('/account/id', authenticate, authorization, FixtureController.getFixtureByAccountId);
+
+
+// Update a Fixture
+router.put('/', authenticate, authorization, FixtureController.updateFixture);
+
+
+router.get('/:urlpath?', authenticate, FixtureController.redirectToFixtureUrl);
 export default router;

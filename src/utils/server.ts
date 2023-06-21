@@ -6,6 +6,8 @@ import bodyParser from 'body-parser';
 import { errorHandler, notFoundHandler } from '../middlewares/errorHandlers';
 import rateLimitErrorHandler from '../middlewares/rateLimiterError';
 import accountRoutes from '../routes/accountRoute'
+import teamRoutes from '../routes/teamRoute'
+import fixtureRoute from '../routes/fixtureRoute';
 
 function createServer() {
     const app = express();
@@ -20,6 +22,8 @@ function createServer() {
 
     // use routes
     app.use('/account', accountRoutes);
+    app.use('/team', teamRoutes);
+    app.use('/fixture', fixtureRoute);
 
 
     // handle 404 errors

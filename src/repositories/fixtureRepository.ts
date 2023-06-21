@@ -1,54 +1,53 @@
+import { IFixture } from './../interfaces/fixtureInterface';
+import fixtureModel from '../models/fixtureModel';
 
-import IAccount from '../interfaces/accountInterface';
-import accountModel from '../models/accountModel';
-
-class accountRepository {
-    public accountModel = accountModel;
+class fixtureRepository {
+    public fixtureModel = fixtureModel;
 
 
-    public async createAccount(data: IAccount): Promise<IAccount> {
-        const signUpAccount = await this.accountModel.create(data);
-        return signUpAccount
+    public async createFixture(data: IFixture): Promise<IFixture> {
+        const fixture = await this.fixtureModel.create(data);
+        return fixture
     }
 
     
-    public async findAllAccounts(): Promise<IAccount[]> {
-        const getAllAccounts = await this.accountModel.find().exec();
-        return getAllAccounts;
+    public async findAllFixture(): Promise<IFixture[]> {
+        const getAllFixtures = await this.fixtureModel.find().populate(['accountId', 'team1', 'team2']).exec();
+  return getAllFixtures;
     }
 
 
-    public async findAccountById(accountId: string): Promise<IAccount | null> {
-        const getAccount = await this.accountModel.findById({ _id: accountId });
-        return getAccount;
+    public async findFixtureById(fixtureId: string): Promise<IFixture | null> {
+        const getFixture = await this.fixtureModel.findById({ _id: fixtureId });
+        return getFixture;
     }
 
-    public async findAccountByEmail(email: string): Promise<IAccount> {
-        const getAccountByEmail = await this.accountModel.findOne({ email: email }).exec();
-        return getAccountByEmail!;
-    }
-
-    public async findAccountByUserName(userName: string): Promise<IAccount> {
-        const getAccountByuserName = await this.accountModel.findOne({ userName: userName }).exec();
-        return getAccountByuserName!;
+    public async findFixtureByAccountId(accountId: string): Promise<IFixture[]> {
+        const getFixtureById = await this.fixtureModel.find({ accountId: accountId }).exec();
+        return getFixtureById!;
     }
 
 
-    public async findAllAdmin(): Promise<IAccount[]> {
-        const getAccountByEmail = await this.accountModel.find({  isAdmin: true }).exec();
-        return getAccountByEmail!;
+    public async findPendingFixtures(): Promise<IFixture[]> {
+        const getPendingFixtures = await this.fixtureModel.find({ status: "Pending" }).exec();
+        return getPendingFixtures!;
     }
 
-    public async findAllNoneAdmin(): Promise<IAccount[]> {
-        const getAccountByEmail = await this.accountModel.find({ isAdmin: false }).exec();
-        return getAccountByEmail!;
+    public async findCompletedFixtures(): Promise<IFixture[]> {
+        const getCompletedFixtures = await this.fixtureModel.find({ status: "Completed" }).exec();
+        return getCompletedFixtures!;
     }
 
-    public async updateAccount(accountId: string, updateData: Partial<IAccount>): Promise<IAccount | null> {
-        const updatedAccount: any = await this.accountModel.findByIdAndUpdate(accountId, updateData, { new: true }).exec();
-        return updatedAccount;
+    public async redirectToFixtureUrl(uniqueLink: string): Promise<IFixture[]> {
+        const getFixture = await this.fixtureModel.find({ uniqueLink: uniqueLink}).exec();
+        return getFixture!;
+    }
+
+    public async updateFixture(fixtureId: string, updateData: Partial<IFixture>): Promise<IFixture | null> {
+        const updatedFixture: any = await this.fixtureModel.findByIdAndUpdate(fixtureId, updateData, { new: true }).exec();
+        return updatedFixture;
     }
 
 }
 
-export default accountRepository;
+export default fixtureRepository;

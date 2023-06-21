@@ -5,7 +5,11 @@ export interface IFixture extends mongoose.Document {
     accountId: mongoose.Schema.Types.ObjectId;
     team1: mongoose.Schema.Types.ObjectId;
     team2: mongoose.Schema.Types.ObjectId;
-    date: Date;
-    completed: string
+    scores: {
+        team1: string
+        team2: string
+    }
+    date: string;
+    status: string
 }
 export default IFixture

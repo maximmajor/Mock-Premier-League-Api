@@ -17,11 +17,11 @@ router.get('/', authenticate, TeamController.getAllTeams);
 
 
 // Get an Team by Account ID
-router.get('/:teamId', TeamController.getTeamById);
+router.get('/:teamId',  authenticate, TeamController.getTeamById);
 
 
 // Get an Team by Account ID
-router.get('/account/:accountId', TeamController.getTeamByAccountId);
+router.get('/account/id', authenticate, authorization, TeamController.getTeamByAccountId);
 
 
 // Update a Team

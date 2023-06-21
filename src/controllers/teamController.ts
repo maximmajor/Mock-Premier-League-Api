@@ -78,7 +78,7 @@ class accountController {
 
     public getTeamByAccountId = async (req: Request, res: Response): Promise<void> => {
         try {
-            const { accountId } = req.params;
+            const accountId = req.user
             const account = await this.accountService.getAccountById(accountId);
             if (!account) {
                 res.status(404).json({ message: 'account not found' });

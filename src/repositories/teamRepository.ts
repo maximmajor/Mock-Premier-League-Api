@@ -13,8 +13,8 @@ class teamRepository {
 
     
     public async findAllTeam(): Promise<ITeam[]> {
-        const getAllTeams = await this.teamModel.find().exec();
-        return getAllTeams;
+        const getAllTeams = await this.teamModel.find().populate('accountId').exec();
+  return getAllTeams;
     }
 
 
