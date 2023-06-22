@@ -48,7 +48,7 @@ class fixtureController {
                 return;
             }
             const fixtures = await this.fixtureService.getAllFixtures();
-            res.status(200).json({ fixtures });
+            res.status(200).json( fixtures );
         } catch (error) {
             if (error instanceof HttpException) {
                 const { statusCode, message } = error;
@@ -69,7 +69,7 @@ class fixtureController {
                 return;
             }
             const fixtures = await this.fixtureService.getPendingFixtures();
-            res.status(200).json({ fixtures });
+            res.status(200).json( fixtures );
         } catch (error) {
             if (error instanceof HttpException) {
                 const { statusCode, message } = error;
@@ -90,7 +90,7 @@ class fixtureController {
                 return;
             }
             const fixtures = await this.fixtureService.getCompletedFixtures();
-            res.status(200).json({ fixtures });
+            res.status(200).json( fixtures );
         } catch (error) {
             if (error instanceof HttpException) {
                 const { statusCode, message } = error;
@@ -105,13 +105,14 @@ class fixtureController {
         try {
             const accountId = req.user
             const fixtureId = req.params.fixtureId
+            console.log(fixtureId)
             const getAuthAccount = await this.accountService.getAuthAccount(accountId);
             if (!getAuthAccount) {
                 res.status(401).json({ message: 'Account Not Found' });
                 return;
             }
             const fixtures = await this.fixtureService.getFixtureById(fixtureId);
-            res.status(200).json({ fixtures });
+            res.status(200).json(fixtures );
         } catch (error) {
             if (error instanceof HttpException) {
                 const { statusCode, message } = error;
@@ -130,7 +131,7 @@ class fixtureController {
                 res.status(404).json({ message: 'account not found' });
             }
             const fixtures = await this.fixtureService.getFixtureByAccountId(accountId);
-            res.status(200).json({ fixtures });
+            res.status(200).json( fixtures );
         } catch (error) {
             if (error instanceof HttpException) {
                 const { statusCode, message } = error;
@@ -152,7 +153,7 @@ class fixtureController {
             }
             const updateData = req.body;
             const updatedFixture = await this.fixtureService.updateFixture(fixtureId, updateData);
-            res.status(200).json({ updatedFixture });
+            res.status(200).json( updatedFixture );
         } catch (error) {
             if (error instanceof HttpException) {
                 const { statusCode, message } = error;
@@ -163,19 +164,20 @@ class fixtureController {
         }
     };
 
-    public async redirectToFixtureUrl(req: Request, res: Response): Promise<void> {
+    public async findByUniqueLink(req: Request, res: Response): Promise<void> {
         try {
           const { urlpath } = req.params;
+          console.log(urlpath);
           if (!urlpath) {
             res.status(400).json({ error: 'URL path is required' });
             return
           }
-          const link: any = await this.fixtureService.redirectToFixtureUrl(urlpath);
+          const link: any = await this.fixtureService.findByUniqueLink(urlpath);
           if (!link) {
             res.status(404).json({ error: ' URL not found' });
             return
           }
-          res.redirect(link.uniqueLink)
+          res.status(200).json( link.uniqueLink );
         } catch (err) {
           res.status(500).json({ error: 'Internal server error' });
         }

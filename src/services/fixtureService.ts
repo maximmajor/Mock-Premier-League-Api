@@ -17,10 +17,6 @@ class fixtureService {
     }
 
     public async createFixture(data: any, accountId: string, baseUrl: string): Promise<IFixture | String> {
-        const checkIfFixtureExist = await this.teamRepository.findTeamByTeamName(data.teamName)
-        if (checkIfFixtureExist.length > 0) {
-            throw new HttpException(409, 'Fixture Already Exist');
-        }
         const generateShortUrlPath = `${shortid.generate()}`
         const createFixture: any = {
             uniqueLink: `${baseUrl}${generateShortUrlPath}`,
@@ -39,17 +35,17 @@ class fixtureService {
     }
 
     public async getPendingFixtures(): Promise<IFixture[]> {
-        const fixtures: any = await this.fixtureRepository.findAllFixture();
+        const fixtures: any = await this.fixtureRepository.findPendingFixtures();
         return fixtures
     }
 
     public async getCompletedFixtures(): Promise<IFixture[]> {
-        const fixtures: any = await this.fixtureRepository.findAllFixture();
+        const fixtures: any = await this.fixtureRepository.findCompletedFixtures();
         return fixtures
     }
 
-    public async redirectToFixtureUrl(uniqueLink: string): Promise<IFixture[]> {
-        const fixtures: any = await this.fixtureRepository.redirectToFixtureUrl(uniqueLink);
+    public async findByUniqueLink(uniqueLink: string): Promise<IFixture[]> {
+        const fixtures: any = await this.fixtureRepository.findByUniqueLink(uniqueLink);
         return fixtures
     }
 

@@ -24,7 +24,7 @@ router.get('/all/completed', authenticate, FixtureController.getCompletedFixture
 
 
 // Get an Fixture by Account ID
-router.get('/:FixtureId',  authenticate, FixtureController.getFixtureById);
+router.get('/get/id/:fixtureId',  authenticate, FixtureController.getFixtureById);
 
 
 // Get an Fixture by Account ID
@@ -32,8 +32,8 @@ router.get('/account/id', authenticate, authorization, FixtureController.getFixt
 
 
 // Update a Fixture
-router.put('/', authenticate, authorization, FixtureController.updateFixture);
+router.put('/:fixtureId', authenticate, authorization, FixtureController.updateFixture);
 
 
-router.get('/:urlpath?', authenticate, FixtureController.redirectToFixtureUrl);
+router.get('/:urlpath?', authenticate, FixtureController.findByUniqueLink);
 export default router;

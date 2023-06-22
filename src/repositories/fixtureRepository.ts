@@ -38,13 +38,13 @@ class fixtureRepository {
         return getCompletedFixtures!;
     }
 
-    public async redirectToFixtureUrl(uniqueLink: string): Promise<IFixture[]> {
+    public async findByUniqueLink(uniqueLink: string): Promise<IFixture[]> {
         const getFixture = await this.fixtureModel.find({ uniqueLink: uniqueLink}).exec();
         return getFixture!;
     }
 
     public async updateFixture(fixtureId: string, updateData: Partial<IFixture>): Promise<IFixture | null> {
-        const updatedFixture: any = await this.fixtureModel.findByIdAndUpdate(fixtureId, updateData, { new: true }).exec();
+        const updatedFixture: any = await this.fixtureModel.findByIdAndUpdate({_id: fixtureId}, updateData, { new: true }).exec();
         return updatedFixture;
     }
 

@@ -44,7 +44,7 @@ class accountController {
                 return;
             }
             const teams = await this.teamService.getAllTeams();
-            res.status(200).json({ teams });
+            res.status(200).json( teams );
         } catch (error) {
             if (error instanceof HttpException) {
                 const { statusCode, message } = error;
@@ -65,7 +65,7 @@ class accountController {
                 return;
             }
             const teams = await this.teamService.getTeamById(teamId);
-            res.status(200).json({ teams });
+            res.status(200).json(teams );
         } catch (error) {
             if (error instanceof HttpException) {
                 const { statusCode, message } = error;
@@ -84,7 +84,7 @@ class accountController {
                 res.status(404).json({ message: 'account not found' });
             } 
             const teams = await this.teamService.getTeamByAccountId(accountId);
-            res.status(200).json({ teams });
+            res.status(200).json( teams );
         } catch (error) {
             if (error instanceof HttpException) {
                 const { statusCode, message } = error;
@@ -106,7 +106,7 @@ class accountController {
             }
             const updateData = req.body;
             const updatedTeam = await this.teamService.updateTeam(teamId, updateData);
-            res.status(200).json({ updatedTeam });
+            res.status(200).json( updatedTeam );
         } catch (error) {
             if (error instanceof HttpException) {
                 const { statusCode, message } = error;
