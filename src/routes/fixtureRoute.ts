@@ -36,4 +36,13 @@ router.put('/:fixtureId', authenticate, authorization, FixtureController.updateF
 
 
 router.get('/:urlpath?', authenticate, FixtureController.findByUniqueLink);
+
+// Remove a Fixture
+router.delete('/remove/:teamId', authenticate, FixtureController.removeFixture);
+
+// search a Fixture
+router.get('/robust/search', FixtureController.searchFixture);
+
 export default router;
+
+

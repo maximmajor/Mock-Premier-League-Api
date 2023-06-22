@@ -2,6 +2,7 @@ import express, { Router } from 'express';
 import accountController from '../controllers/accountController';
 import authenticate from '../middlewares/authentication';
 import validateRequestBody from '../middlewares/validateRequestBody';
+import rateLimiter from '../middlewares/rateLimiter';
 
 const router: Router = express.Router();
 const AccountController = new accountController();
@@ -9,27 +10,30 @@ const AccountController = new accountController();
 
 
 // Create a new account
-router.post('/create', validateRequestBody, AccountController.createAccount);
+router.post('/create', rateLimiter, validateRequestBody, AccountController.createAccount);
 
 // Login account
-router.post('/login', AccountController.login);
+router.post('/login', rateLimiter, AccountController.login);
 
 // Authenticate account
-router.get('/', authenticate, AccountController.getAuthAccount);
+router.get('/', rateLimiter,  authenticate, AccountController.getAuthAccount);
 
 // Get all accounts
-router.get('/all', AccountController.getAllAccounts);
+router.get('/all', rateLimiter, AccountController.getAllAccounts);
 
 // Get an account by ID
-router.get('/:accountId', AccountController.getAccountById);
+router.get('/:accountId', rateLimiter, AccountController.getAccountById);
 
 // Get all admin
-router.get('/all/admin', AccountController.getAllAdmin);
+router.get('/all/admin', rateLimiter, AccountController.getAllAdmin);
 
 // Get all None Admin
-router.get('/none/admin', AccountController.getAllNoneAdmin);
+router.get('/none/admin', rateLimiter, AccountController.getAllNoneAdmin);
 
 // Update a account
-router.put('/', authenticate, AccountController.updateAccount);
+router.put('/', rateLimiter, authenticate, AccountController.updateAccount);
+
+// Remove a account
+router.delete('/remove', rateLimiter, authenticate, AccountController.removeAccount);
 
 export default router;

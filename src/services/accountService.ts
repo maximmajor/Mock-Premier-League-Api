@@ -78,6 +78,12 @@ class accountService {
         const updatedAccount = await this.accountRepository.updateAccount(accountId, updateData);
         return updatedAccount;
     }
+
+
+    public async removeAccount(accountId: string): Promise<IAccount | null> {
+        const account = await this.accountRepository.removeAccount(accountId);
+        return account;
+    }
 }
 
 export default accountService;

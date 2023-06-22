@@ -48,6 +48,20 @@ class fixtureRepository {
         return updatedFixture;
     }
 
+    public async removeFixture(fixtureId: string): Promise<IFixture | null> {
+        const removeAccount: any = await this.fixtureModel.findByIdAndRemove({_id: fixtureId})
+        return removeAccount;
+    }
+
+    public async searchFixture(searchCriteria: any): Promise<IFixture | null> {
+        const searchFixture: any = await this.fixtureModel.find(searchCriteria)
+        .populate('accountId')
+        .populate('team1')
+        .populate('team2')
+        .exec();
+        return searchFixture;
+    }
+
 }
 
 export default fixtureRepository;

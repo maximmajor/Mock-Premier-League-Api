@@ -183,6 +183,42 @@ class fixtureController {
         }
       }
 
+public removeFixture = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const accountId = req.user
+        const fixtureId = req.params.fixtureId
+        console.log(fixtureId)
+        const getAuthAccount = await this.accountService.getAuthAccount(accountId);
+        if (!getAuthAccount) {
+            res.status(401).json({ message: 'Account Not Found' });
+            return;
+        }
+        const fixtures = await this.fixtureService.removeFixture(fixtureId);
+        res.status(200).json(fixtures );
+    } catch (error) {
+        if (error instanceof HttpException) {
+            const { statusCode, message } = error;
+            res.status(statusCode).json({ message });
+        } else {
+            res.status(500).json({ message: 'Internal Server Error' });
+        }
+    }
+};
+
+public searchFixture = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { uniqueLink, teamId, status } = req.query;
+        const fixtures = await this.fixtureService.searchFixture(uniqueLink, teamId, status);
+        res.status(200).json(fixtures );
+    } catch (error) {
+        if (error instanceof HttpException) {
+            const { statusCode, message } = error;
+            res.status(statusCode).json({ message });
+        } else {
+            res.status(500).json({ message: 'Internal Server Error' });
+        }
+    }
+};
 }
 
 export default fixtureController;

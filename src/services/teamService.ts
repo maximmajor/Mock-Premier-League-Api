@@ -53,6 +53,29 @@ class teamService {
         const updatedTeam = await this.teamRepository.updateTeam(teamId, updateData);
         return updatedTeam;
     }
+
+    public async removeTeam(teamId: string): Promise<string | null> {
+        const team: any = await this.teamRepository.removeTeam(teamId);
+        if (!team) {
+            throw new HttpException(409, 'Team does not exist');
+        }
+        return team
+    }
+
+    public async searchTeam(teamName: any, accountId: any): Promise<string | null> {
+        const searchCriteria: any = {};
+
+        if (teamName) {
+          searchCriteria.teamName = { $regex: new RegExp(teamName, 'i') };
+        }
+    
+        if (accountId) {
+          searchCriteria.accountId = accountId;
+        }
+        const team: any = await this.teamRepository.searchTeam(searchCriteria);
+        return team
+    }
+
 }
 
 export default teamService;

@@ -165,6 +165,25 @@ class accountController {
         }
     };
 
+    public removeAccount = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const { accountId } = req.params;
+            const account = await this.accountService.removeAccount(accountId);
+            if (!account) {
+                res.status(404).json({ message: 'account not found' });
+            } else {
+                res.status(200).json(account);
+            }
+        } catch (error) {
+            if (error instanceof HttpException) {
+                const { statusCode, message } = error;
+                res.status(statusCode).json({ message });
+            } else {
+                res.status(500).json({ message: 'Internal Server Error' });
+            }
+        }
+    };
+
 }
 
 export default accountController;

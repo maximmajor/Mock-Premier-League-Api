@@ -49,6 +49,12 @@ class accountRepository {
         return updatedAccount;
     }
 
+
+    public async removeAccount(accountId: string): Promise<IAccount | null> {
+        const removeAccount: any = await this.accountModel.findByIdAndRemove({_id: accountId})
+        return removeAccount;
+    }
+
 }
 
 export default accountRepository;

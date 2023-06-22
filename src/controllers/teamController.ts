@@ -4,7 +4,7 @@ import accountService from '../services/accountService';
 import ITeam from '../interfaces/teamInterface';
 import { HttpException } from '../middlewares/HttpException';
 
-class accountController {
+class teamController {
     private teamService: teamService;
     private accountService: accountService;
 
@@ -117,6 +117,44 @@ class accountController {
         }
     };
 
+
+    public removeTeam = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const accountId = req.user
+            const teamId = req.params.teamId
+            const getAuthAccount = await this.accountService.getAuthAccount(accountId);
+            if (!getAuthAccount) {
+                res.status(401).json({ message: 'Account Not Found' });
+                return;
+            }
+            const teams = await this.teamService.removeTeam(teamId);
+            res.status(200).json(teams );
+        } catch (error) {
+            if (error instanceof HttpException) {
+                const { statusCode, message } = error;
+                res.status(statusCode).json({ message });
+            } else {
+                res.status(500).json({ message: 'Internal Server Error' });
+            }
+        }
+    };
+
+
+    public searchTeam = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const { teamName, accountId } = req.query;
+            const teams = await this.teamService.searchTeam(teamName, accountId);
+            res.status(200).json(teams );
+        } catch (error) {
+            if (error instanceof HttpException) {
+                const { statusCode, message } = error;
+                res.status(statusCode).json({ message });
+            } else {
+                res.status(500).json({ message: 'Internal Server Error' });
+            }
+        }
+    };
+
 }
 
-export default accountController;
+export default teamController;

@@ -40,6 +40,15 @@ class teamRepository {
         return updatedTeam;
     }
 
+    public async removeTeam(teamId: string): Promise<ITeam | null> {
+        const removeTeam: any = await this.teamModel.findByIdAndRemove({_id: teamId})
+        return removeTeam;
+    }
+
+    public async searchTeam(searchCriteria: any): Promise<ITeam | null> {
+        const searchTeam: any = await this.teamModel.find(searchCriteria).populate('accountId').exec();
+        return searchTeam;
+    }
 }
 
 export default teamRepository;

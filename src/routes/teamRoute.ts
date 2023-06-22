@@ -27,4 +27,11 @@ router.get('/account/id', authenticate, authorization, TeamController.getTeamByA
 // Update a Team
 router.put('/', authenticate, authorization, TeamController.updateTeam);
 
+
+// Remove a Team
+router.delete('/remove/:teamId', authenticate, authorization, TeamController.removeTeam);
+
+// search a Team
+router.get('/robust/search',  TeamController.searchTeam);
+
 export default router;

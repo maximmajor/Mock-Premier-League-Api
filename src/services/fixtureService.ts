@@ -71,6 +71,35 @@ class fixtureService {
         const updatedFixture = await this.fixtureRepository.updateFixture(fixtureId, updateData);
         return updatedFixture;
     }
+
+    public async removeFixture(fixtureId: string): Promise<string | null> {
+        const fixture: any = await this.fixtureRepository.removeFixture(fixtureId);
+        if (!fixture) {
+            throw new HttpException(409, 'fixture does not exist');
+        }
+        return fixture
+    }
+
+    public async searchFixture(uniqueLink: any, teamId: any, status: any): Promise<string | null> {
+        const searchCriteria: any = {};
+
+    if (uniqueLink) {
+      searchCriteria.uniqueLink = { $regex: new RegExp(uniqueLink, 'i') };
+    }
+
+    if (teamId) {
+      searchCriteria.$or = [
+        { team1: teamId },
+        { team2: teamId },
+      ];
+    }
+
+    if (status) {
+      searchCriteria.status = status;
+    }
+        const team: any = await this.fixtureRepository.searchFixture(searchCriteria);
+        return team
+    }
 }
 
 export default fixtureService;
