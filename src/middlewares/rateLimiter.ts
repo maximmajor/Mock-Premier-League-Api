@@ -3,7 +3,7 @@ import rateLimit from 'express-rate-limit';
 // Define the rate limiting options
 const limiterOptions = {
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 10, // Maximum number of requests per windowMs
+  max: 1000, // Maximum number of requests per windowMs
   message: 'Too many requests, please try again later.',
 };
 

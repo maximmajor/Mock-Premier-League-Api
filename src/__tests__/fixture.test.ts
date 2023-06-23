@@ -7,7 +7,7 @@ import bcrypt from 'bcrypt';
 
 const app = createServer();
 
-describe('Team Controller', () => {
+describe('Fixture Controller', () => {
     let mongoServer: MongoMemoryServer;
 
     beforeAll(async () => {
@@ -22,8 +22,8 @@ describe('Team Controller', () => {
         await mongoServer.stop();
     });
 
-    describe('POST /team/create', () => {
-        it('should create a team with an authenticated user', async () => {
+    describe('POST /fixture/create', () => {
+        it('should create a fixture with an authenticated user and user must be Admin', async () => {
             const accountData = {
                 name: 'John Doe',
                 userName: 'johndoe',
@@ -46,19 +46,16 @@ describe('Team Controller', () => {
 
             const authToken = loginResponse.body.token;
 
-            const teamData = {
-
-                teamName: "Arsenal",
-                teamMembers: [
-                    { name: "Matteo Guendouzi", "role": "Midfielder" },
-                    { name: "Granit Xhaka", "role": "Midfielder" }
-                ]
-            };
+            const fixtureData = {
+                team1: "649372921f63360e5b36de90",
+                team2: "64936f0ea62de83d4653c93c",
+                date: "23/4/2023 10:10:00"
+              }
 
             const response = await request(app)
-                .post('/team/create')
+                .post('/fixture/create')
                 .set('Authorization', `Bearer ${authToken}`)
-                .send(teamData);
+                .send(fixtureData);
                 expect(response.status).toBe(201);
             expect(response.body).toEqual(response.body);
         });
@@ -85,26 +82,23 @@ describe('Team Controller', () => {
 
             const authToken = loginResponse.body.token;
 
-            const teamData = {
-
-                teamName: "Arsenal",
-                teamMembers: [
-                    { name: "Matteo Guendouzi", "role": "Midfielder" },
-                    { name: "Granit Xhaka", "role": "Midfielder" }
-                ]
-            };
+            const fixtureData = {
+                team1: "649372921f63360e5b36de90",
+                team2: "64936f0ea62de83d4653c93c",
+                date: "23/4/2023 10:10:00"
+              }
 
             const response = await request(app)
-                .post('/team/create')
+                .post('/fixture/create')
                 .set('Authorization', `Bearer ${authToken}`)
-                .send(teamData);
+                .send(fixtureData);
                 expect(response.status).toBe(401);
             expect(response.body).toEqual(response.body);
         });
     })
 
-    describe('GET /team', () => {
-        it('should get all team ', async () => {
+    describe('GET /fixture', () => {
+        it('should get all fixture ', async () => {
             const accountData = {
                 name: 'John Doe',
                 userName: 'johndoe0',
@@ -128,12 +122,12 @@ describe('Team Controller', () => {
             const authToken = loginResponse.body.token;
 
             const response = await request(app)
-                .get('/team')
+                .get('/fixture')
                 .set('Authorization', `Bearer ${authToken}`)
                 expect(response.status).toBe(200);
             expect(response.body).toEqual(response.body);
         });
-        it('should get all team ', async () => {
+        it('should get all fixture ', async () => {
             const accountData = {
                 name: 'John Doe',
                 userName: 'johndoe0',
@@ -157,7 +151,7 @@ describe('Team Controller', () => {
             const authToken = loginResponse.body.token;
 
             const response = await request(app)
-                .get('/team')
+                .get('/fixture')
                 .set('Authorization', `Bearer ${authToken}`)
                 expect(response.status).toBe(200);
             expect(response.body).toEqual(response.body);

@@ -35,8 +35,6 @@ router.get('/account/id', authenticate, authorization, FixtureController.getFixt
 router.put('/:fixtureId', authenticate, authorization, FixtureController.updateFixture);
 
 
-router.get('/:urlpath?', authenticate, FixtureController.findByUniqueLink);
-
 // Remove a Fixture
 router.delete('/remove/:teamId', authenticate, FixtureController.removeFixture);
 

@@ -19,10 +19,11 @@
 
 6. run yarn start
    (This will start the server and listen for incoming requests.)
+```
 
-
-   TO RUN THE TEST CASES
-7. run yarn test
+# TO RUN THE TEST CASES
+``
+   run yarn test
 ```
 
 
