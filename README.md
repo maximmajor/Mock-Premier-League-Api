@@ -1,7 +1,7 @@
 # Mock-Premier-League-Api serves the latest scores of fixtures of matches in a “Mock Premier League”
 
 
-# To run and test the code, follow these steps:
+# To run and start the server, follow these steps:
 ```
 1. Clone the repository from GitHub:
    git clone git@github.com:maximmajor/Mock-Premier-League-Api.git
