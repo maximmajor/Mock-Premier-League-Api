@@ -1,6 +1,5 @@
 import express from 'express';
 import cors from 'cors';
-import helmet from 'helmet';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import { errorHandler, notFoundHandler } from '../middlewares/errorHandlers';
@@ -16,7 +15,6 @@ function createServer() {
 
     // use middlewares
     app.use(cors());
-    app.use(helmet());
     app.use(morgan('tiny'));
     app.use(bodyParser.json());
 
