@@ -1,40 +1,37 @@
-# Multi-stage build
-# The first stage
+#multi stage build
+#The first machine
 FROM node:14-alpine AS compilation
 
-# Working directory
+#working directory
 WORKDIR /tmp/compilation
-
-# Copy project files
+#does not copy ignored files
 COPY . .
-
-# Install dependencies
+#run to get your node_modules
 RUN yarn
 
-# Compile TypeScript code
+#compile your tsc get your dist
 RUN yarn tsc
 
-# The second stage
+FROM node:14-alpine AS build
+
+WORKDIR /tmp/build
+
+COPY . .
+
+RUN yarn --production
+
 FROM node:14-alpine AS production
 
 ENV NODE_ENV production
 
 WORKDIR /app
 
-# Copy built files from the compilation stage
-COPY --from=compilation /tmp/compilation/build build
-COPY --from=compilation /tmp/compilation/node_modules node_modules
+COPY --from=compilation /tmp/compilation/dist dist
+COPY --from=build /tmp/build/node_modules node_modules
 
-# Copy other required files
-COPY public public
+
+
 COPY package.json package.json
-
-# Install production dependencies
-RUN yarn --production
-
-# Expose the required port
 EXPOSE 3000
 
-
-# Start the server
-CMD ["node", "dist/app.js"]
+CMD ["node" ,"dist/app.js"]
