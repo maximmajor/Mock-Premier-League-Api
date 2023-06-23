@@ -12,34 +12,34 @@ class fixtureRepository {
 
     
     public async findAllFixture(): Promise<IFixture[]> {
-        const getAllFixtures = await this.fixtureModel.find().populate(['accountId', 'team1', 'team2']).exec();
+        const getAllFixtures = await this.fixtureModel.find().populate([ 'team1', 'team2']).exec();
   return getAllFixtures;
     }
 
 
     public async findFixtureById(fixtureId: string): Promise<IFixture | null> {
-        const getFixture = await this.fixtureModel.findById({ _id: fixtureId });
+        const getFixture = await this.fixtureModel.findById({ _id: fixtureId }).populate([ 'team1', 'team2']).exec();
         return getFixture;
     }
 
     public async findFixtureByAccountId(accountId: string): Promise<IFixture[]> {
-        const getFixtureById = await this.fixtureModel.find({ accountId: accountId }).exec();
+        const getFixtureById = await this.fixtureModel.find({ accountId: accountId }).populate([ 'team1', 'team2']).exec();
         return getFixtureById!;
     }
 
 
     public async findPendingFixtures(): Promise<IFixture[]> {
-        const getPendingFixtures = await this.fixtureModel.find({ status: "Pending" }).exec();
+        const getPendingFixtures = await this.fixtureModel.find({ status: "Pending" }).populate([ 'team1', 'team2']).exec();
         return getPendingFixtures!;
     }
 
     public async findCompletedFixtures(): Promise<IFixture[]> {
-        const getCompletedFixtures = await this.fixtureModel.find({ status: "Completed" }).exec();
+        const getCompletedFixtures = await this.fixtureModel.find({ status: "Completed" }).populate([ 'team1', 'team2']).exec();
         return getCompletedFixtures!;
     }
 
     public async findByUniqueLink(uniqueLink: string): Promise<IFixture[]> {
-        const getFixture = await this.fixtureModel.find({ uniqueLink: uniqueLink}).exec();
+        const getFixture = await this.fixtureModel.find({ uniqueLink: uniqueLink}).populate([ 'team1', 'team2']).exec();
         return getFixture!;
     }
 
