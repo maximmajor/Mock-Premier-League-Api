@@ -18,6 +18,12 @@ function createServer() {
     app.use(morgan('tiny'));
     app.use(bodyParser.json());
 
+    //Home page
+    app.get('/', (req, res) => {
+        res.send('Mock-Premier-League-Api”!');
+    });
+
+
     // use routes
     app.use('/account', accountRoutes);
     app.use('/team', teamRoutes);
