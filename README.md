@@ -93,7 +93,7 @@ or a browser extension. Here are some of the requests:
 
 
 4. Get All Teams By Account Id:
-   GET https://mock-premier-league-api-production.up.railway.app/team/all/account
+   GET https://mock-premier-league-api-production.up.railway.app/team/account/id
 
 3. Update Team:
    PUT https://mock-premier-league-api-production.up.railway.app/team
@@ -125,12 +125,12 @@ or a browser extension. Here are some of the requests:
    Content-Type: application/json
  
 
-3. Get Unique Fixture:
+3. Get Fixture By Id:
    GET https://mock-premier-league-api-production.up.railway.app/fixture/get/id/:fixtureId
 
 
 4. Get All Fixture By Account Id:
-   GET https://mock-premier-league-api-production.up.railway.app/fixture/all/account
+   GET https://mock-premier-league-api-production.up.railway.app/fixture/account/id
 
 3. Update Fixture:
    PUT https://mock-premier-league-api-production.up.railway.app/fixture
