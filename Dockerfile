@@ -30,8 +30,6 @@ COPY --from=compilation /tmp/compilation/build build
 COPY --from=build /tmp/build/node_modules node_modules
 
 
-COPY public public
-
 
 COPY package.json package.json
 EXPOSE 3000
