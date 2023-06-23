@@ -26,7 +26,7 @@ ENV NODE_ENV production
 
 WORKDIR /app
 
-COPY --from=compilation /tmp/compilation/build build
+COPY --from=compilation /tmp/compilation/dist dist
 COPY --from=build /tmp/build/node_modules node_modules
 
 
