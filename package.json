@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "test": "jest",
-    "build": "tsc",
+    "build": "tsc ",
     "start": "node dist/app.js",
     "production": "tsc && node dist/app.js",
     "dev": "ts-node-dev --respawn --transpileOnly src/app.ts"
