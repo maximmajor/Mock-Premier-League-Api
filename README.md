@@ -134,6 +134,16 @@ or a browser extension. Here are some of the requests:
 
 3. Update Fixture:
    PUT https://mock-premier-league-api-production.up.railway.app/fixture
+   {
+  "team1": "649372921f63360e5b36de90",
+  "team2": "64936f0ea62de83d4653c93c",
+  "date": "23/4/2023 10:10:20",
+  "scores": {
+            "team1": 1,
+            "team2": 0
+          },
+    "status": "Completed"
+}
 
 4. Remove Fixture:
    GET https://mock-premier-league-api-production.up.railway.app/remove/:fixtureId
