@@ -9,7 +9,7 @@ const FixtureController = new fixtureController();
 
 
 // Create a new Fixture
-router.post('/create', authenticate, authorization,  FixtureController.createFixture);
+router.post('/create', authenticate, authorization, FixtureController.createFixture);
 
 
 // Authenticate Fixture
@@ -24,7 +24,7 @@ router.get('/all/completed', authenticate, FixtureController.getCompletedFixture
 
 
 // Get an Fixture by Account ID
-router.get('/get/id/:fixtureId',  authenticate, FixtureController.getFixtureById);
+router.get('/get/id/:fixtureId', authenticate, FixtureController.getFixtureById);
 
 
 // Get an Fixture by Account ID

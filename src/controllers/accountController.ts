@@ -30,9 +30,9 @@ class accountController {
             const { email, password, ...otherFields } = req.body;
             // Check if there are any other fields present in the request body
             if (Object.keys(otherFields).length > 0) {
-              const errorMessage = 'Invalid fields in request body. Only email and password are allowed.';
-               res.status(400).json({ error: errorMessage });
-               return
+                const errorMessage = 'Invalid fields in request body. Only email and password are allowed.';
+                res.status(400).json({ error: errorMessage });
+                return
             }
 
             const token = await this.accountService.login(email, password);

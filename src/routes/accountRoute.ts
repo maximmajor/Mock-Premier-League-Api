@@ -16,7 +16,7 @@ router.post('/create', rateLimiter, validateRequestBody, AccountController.creat
 router.post('/login', rateLimiter, AccountController.login);
 
 // Authenticate account
-router.get('/', rateLimiter,  authenticate, AccountController.getAuthAccount);
+router.get('/', rateLimiter, authenticate, AccountController.getAuthAccount);
 
 // Get all accounts
 router.get('/all', rateLimiter, AccountController.getAllAccounts);

@@ -44,7 +44,7 @@ class teamController {
                 return;
             }
             const teams = await this.teamService.getAllTeams();
-            res.status(200).json( teams );
+            res.status(200).json(teams);
         } catch (error) {
             if (error instanceof HttpException) {
                 const { statusCode, message } = error;
@@ -65,7 +65,7 @@ class teamController {
                 return;
             }
             const teams = await this.teamService.getTeamById(teamId);
-            res.status(200).json(teams );
+            res.status(200).json(teams);
         } catch (error) {
             if (error instanceof HttpException) {
                 const { statusCode, message } = error;
@@ -82,9 +82,9 @@ class teamController {
             const account = await this.accountService.getAccountById(accountId);
             if (!account) {
                 res.status(404).json({ message: 'account not found' });
-            } 
+            }
             const teams = await this.teamService.getTeamByAccountId(accountId);
-            res.status(200).json( teams );
+            res.status(200).json(teams);
         } catch (error) {
             if (error instanceof HttpException) {
                 const { statusCode, message } = error;
@@ -106,7 +106,7 @@ class teamController {
             }
             const updateData = req.body;
             const updatedTeam = await this.teamService.updateTeam(teamId, updateData);
-            res.status(200).json( updatedTeam );
+            res.status(200).json(updatedTeam);
         } catch (error) {
             if (error instanceof HttpException) {
                 const { statusCode, message } = error;
@@ -128,7 +128,7 @@ class teamController {
                 return;
             }
             const teams = await this.teamService.removeTeam(teamId);
-            res.status(200).json(teams );
+            res.status(200).json(teams);
         } catch (error) {
             if (error instanceof HttpException) {
                 const { statusCode, message } = error;
@@ -144,7 +144,7 @@ class teamController {
         try {
             const { teamName, accountId } = req.query;
             const teams = await this.teamService.searchTeam(teamName, accountId);
-            res.status(200).json(teams );
+            res.status(200).json(teams);
         } catch (error) {
             if (error instanceof HttpException) {
                 const { statusCode, message } = error;

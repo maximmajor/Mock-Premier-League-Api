@@ -101,7 +101,7 @@ or a browser extension. Here are some of the requests:
 4. Remove Team:
    GET https://mock-premier-league-api-production.up.railway.app/remove/:teamId
 
-5. Robustly Teams:
+5. Robustly Search Teams:
    GET https://mock-premier-league-api-production.up.railway.app/team/robust/search?teamId=649372921f63360e5b36de90
    GET https://mock-premier-league-api-production.up.railway.app/team/robust/search?teamName=Arsenal
 ```
@@ -148,7 +148,7 @@ or a browser extension. Here are some of the requests:
 4. Remove Fixture:
    GET https://mock-premier-league-api-production.up.railway.app/remove/:fixtureId
 
-5. Robustly Fixtures:
+5. Robustly Search Fixtures:
    GET https://mock-premier-league-api-production.up.railway.app/fixture/robust/search?teamId=649372921f63360e5b36de90
    GET https://mock-premier-league-api-production.up.railway.app/fixture/robust/search?status=Completed
 ```

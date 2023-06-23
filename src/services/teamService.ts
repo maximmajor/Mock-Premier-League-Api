@@ -66,11 +66,11 @@ class teamService {
         const searchCriteria: any = {};
 
         if (teamName) {
-          searchCriteria.teamName = { $regex: new RegExp(teamName, 'i') };
+            searchCriteria.teamName = { $regex: new RegExp(teamName, 'i') };
         }
-    
+
         if (accountId) {
-          searchCriteria.accountId = accountId;
+            searchCriteria.accountId = accountId;
         }
         const team: any = await this.teamRepository.searchTeam(searchCriteria);
         return team

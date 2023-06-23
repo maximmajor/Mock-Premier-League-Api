@@ -59,7 +59,7 @@ describe('Team Controller', () => {
                 .post('/team/create')
                 .set('Authorization', `Bearer ${authToken}`)
                 .send(teamData);
-                expect(response.status).toBe(201);
+            expect(response.status).toBe(201);
             expect(response.body).toEqual(response.body);
         });
 
@@ -98,7 +98,7 @@ describe('Team Controller', () => {
                 .post('/team/create')
                 .set('Authorization', `Bearer ${authToken}`)
                 .send(teamData);
-                expect(response.status).toBe(401);
+            expect(response.status).toBe(401);
             expect(response.body).toEqual(response.body);
         });
     })
@@ -130,7 +130,7 @@ describe('Team Controller', () => {
             const response = await request(app)
                 .get('/team')
                 .set('Authorization', `Bearer ${authToken}`)
-                expect(response.status).toBe(200);
+            expect(response.status).toBe(200);
             expect(response.body).toEqual(response.body);
         });
         it('should get all team ', async () => {
@@ -159,10 +159,10 @@ describe('Team Controller', () => {
             const response = await request(app)
                 .get('/team')
                 .set('Authorization', `Bearer ${authToken}`)
-                expect(response.status).toBe(200);
+            expect(response.status).toBe(200);
             expect(response.body).toEqual(response.body);
         });
-        
+
 
     })
 

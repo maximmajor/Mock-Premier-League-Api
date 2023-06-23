@@ -50,13 +50,13 @@ describe('Fixture Controller', () => {
                 team1: "649372921f63360e5b36de90",
                 team2: "64936f0ea62de83d4653c93c",
                 date: "23/4/2023 10:10:00"
-              }
+            }
 
             const response = await request(app)
                 .post('/fixture/create')
                 .set('Authorization', `Bearer ${authToken}`)
                 .send(fixtureData);
-                expect(response.status).toBe(201);
+            expect(response.status).toBe(201);
             expect(response.body).toEqual(response.body);
         });
 
@@ -86,13 +86,13 @@ describe('Fixture Controller', () => {
                 team1: "649372921f63360e5b36de90",
                 team2: "64936f0ea62de83d4653c93c",
                 date: "23/4/2023 10:10:00"
-              }
+            }
 
             const response = await request(app)
                 .post('/fixture/create')
                 .set('Authorization', `Bearer ${authToken}`)
                 .send(fixtureData);
-                expect(response.status).toBe(401);
+            expect(response.status).toBe(401);
             expect(response.body).toEqual(response.body);
         });
     })
@@ -124,7 +124,7 @@ describe('Fixture Controller', () => {
             const response = await request(app)
                 .get('/fixture')
                 .set('Authorization', `Bearer ${authToken}`)
-                expect(response.status).toBe(200);
+            expect(response.status).toBe(200);
             expect(response.body).toEqual(response.body);
         });
         it('should get all fixture ', async () => {
@@ -153,10 +153,10 @@ describe('Fixture Controller', () => {
             const response = await request(app)
                 .get('/fixture')
                 .set('Authorization', `Bearer ${authToken}`)
-                expect(response.status).toBe(200);
+            expect(response.status).toBe(200);
             expect(response.body).toEqual(response.body);
         });
-        
+
 
     })
 

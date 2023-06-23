@@ -11,7 +11,7 @@ class accountRepository {
         return signUpAccount
     }
 
-    
+
     public async findAllAccounts(): Promise<IAccount[]> {
         const getAllAccounts = await this.accountModel.find().exec();
         return getAllAccounts;
@@ -35,7 +35,7 @@ class accountRepository {
 
 
     public async findAllAdmin(): Promise<IAccount[]> {
-        const getAccountByEmail = await this.accountModel.find({  isAdmin: true }).exec();
+        const getAccountByEmail = await this.accountModel.find({ isAdmin: true }).exec();
         return getAccountByEmail!;
     }
 
@@ -51,7 +51,7 @@ class accountRepository {
 
 
     public async removeAccount(accountId: string): Promise<IAccount | null> {
-        const removeAccount: any = await this.accountModel.findByIdAndRemove({_id: accountId})
+        const removeAccount: any = await this.accountModel.findByIdAndRemove({ _id: accountId })
         return removeAccount;
     }
 

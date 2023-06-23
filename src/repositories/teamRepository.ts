@@ -11,10 +11,10 @@ class teamRepository {
         return team
     }
 
-    
+
     public async findAllTeam(): Promise<ITeam[]> {
         const getAllTeams = await this.teamModel.find().populate('accountId').exec();
-  return getAllTeams;
+        return getAllTeams;
     }
 
 
@@ -30,7 +30,7 @@ class teamRepository {
 
 
     public async findTeamByTeamName(teamName: string): Promise<ITeam[]> {
-        const getTeamByTeamNamel = await this.teamModel.find({  teamName: teamName }).exec();
+        const getTeamByTeamNamel = await this.teamModel.find({ teamName: teamName }).exec();
         return getTeamByTeamNamel!;
     }
 
@@ -41,7 +41,7 @@ class teamRepository {
     }
 
     public async removeTeam(teamId: string): Promise<ITeam | null> {
-        const removeTeam: any = await this.teamModel.findByIdAndRemove({_id: teamId})
+        const removeTeam: any = await this.teamModel.findByIdAndRemove({ _id: teamId })
         return removeTeam;
     }
 

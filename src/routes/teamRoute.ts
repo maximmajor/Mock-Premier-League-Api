@@ -9,7 +9,7 @@ const TeamController = new teamController();
 
 
 // Create a new Team
-router.post('/create', authenticate, authorization,  TeamController.createTeam);
+router.post('/create', authenticate, authorization, TeamController.createTeam);
 
 
 // Authenticate Team
@@ -17,7 +17,7 @@ router.get('/', authenticate, TeamController.getAllTeams);
 
 
 // Get an Team by Account ID
-router.get('/:teamId',  authenticate, TeamController.getTeamById);
+router.get('/:teamId', authenticate, TeamController.getTeamById);
 
 
 // Get an Team by Account ID
@@ -32,6 +32,6 @@ router.put('/', authenticate, authorization, TeamController.updateTeam);
 router.delete('/remove/:teamId', authenticate, authorization, TeamController.removeTeam);
 
 // search a Team
-router.get('/robust/search',  TeamController.searchTeam);
+router.get('/robust/search', TeamController.searchTeam);
 
 export default router;

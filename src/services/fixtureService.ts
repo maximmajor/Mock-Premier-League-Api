@@ -83,20 +83,20 @@ class fixtureService {
     public async searchFixture(uniqueLink: any, teamId: any, status: any): Promise<string | null> {
         const searchCriteria: any = {};
 
-    if (uniqueLink) {
-      searchCriteria.uniqueLink = { $regex: new RegExp(uniqueLink, 'i') };
-    }
+        if (uniqueLink) {
+            searchCriteria.uniqueLink = { $regex: new RegExp(uniqueLink, 'i') };
+        }
 
-    if (teamId) {
-      searchCriteria.$or = [
-        { team1: teamId },
-        { team2: teamId },
-      ];
-    }
+        if (teamId) {
+            searchCriteria.$or = [
+                { team1: teamId },
+                { team2: teamId },
+            ];
+        }
 
-    if (status) {
-      searchCriteria.status = status;
-    }
+        if (status) {
+            searchCriteria.status = status;
+        }
         const team: any = await this.fixtureRepository.searchFixture(searchCriteria);
         return team
     }
