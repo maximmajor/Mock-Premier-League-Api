@@ -22,10 +22,9 @@
 ```
 
 # TO RUN THE TEST CASES
-``
+```
    run yarn test
 ```
-
 
 
 # TO INTERACT WITH THE SERVER:
