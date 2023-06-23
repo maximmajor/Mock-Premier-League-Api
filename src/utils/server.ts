@@ -20,7 +20,7 @@ function createServer() {
 
     //Home page
     app.get('/', (req, res) => {
-        res.send('Mock-Premier-League-Api”!');
+        res.send('Welcome to Mock-Premier-League-Api”!');
     });
 
 
