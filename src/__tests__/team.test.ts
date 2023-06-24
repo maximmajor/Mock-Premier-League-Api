@@ -3,7 +3,6 @@ import createServer from '../utils/server';
 import { expect, beforeAll, afterAll } from '@jest/globals';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
 
 const app = createServer();
 

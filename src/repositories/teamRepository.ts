@@ -36,17 +36,17 @@ class teamRepository {
 
 
     public async updateTeam(teamId: string, updateData: Partial<ITeam>): Promise<ITeam | null> {
-        const updatedTeam: any = await this.teamModel.findByIdAndUpdate(teamId, updateData, { new: true }).exec();
+        const updatedTeam = await this.teamModel.findByIdAndUpdate(teamId, updateData, { new: true }).exec();
         return updatedTeam;
     }
 
     public async removeTeam(teamId: string): Promise<ITeam | null> {
-        const removeTeam: any = await this.teamModel.findByIdAndRemove({ _id: teamId })
+        const removeTeam = await this.teamModel.findByIdAndRemove({ _id: teamId })
         return removeTeam;
     }
 
-    public async searchTeam(searchCriteria: any): Promise<ITeam | null> {
-        const searchTeam: any = await this.teamModel.find(searchCriteria).populate('accountId').exec();
+    public async searchTeam(searchCriteria: any): Promise<ITeam[] | null> {
+        const searchTeam = await this.teamModel.find(searchCriteria).populate('accountId').exec();
         return searchTeam;
     }
 }

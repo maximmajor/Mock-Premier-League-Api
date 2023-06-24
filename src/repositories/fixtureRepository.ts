@@ -44,12 +44,12 @@ class fixtureRepository {
     }
 
     public async updateFixture(fixtureId: string, updateData: Partial<IFixture>): Promise<IFixture | null> {
-        const updatedFixture: any = await this.fixtureModel.findByIdAndUpdate({ _id: fixtureId }, updateData, { new: true }).exec();
+        const updatedFixture = await this.fixtureModel.findByIdAndUpdate({ _id: fixtureId }, updateData, { new: true }).exec();
         return updatedFixture;
     }
 
     public async removeFixture(fixtureId: string): Promise<IFixture | null> {
-        const removeAccount: any = await this.fixtureModel.findByIdAndRemove({ _id: fixtureId })
+        const removeAccount = await this.fixtureModel.findByIdAndRemove({ _id: fixtureId })
         return removeAccount;
     }
 

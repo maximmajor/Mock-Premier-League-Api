@@ -1,17 +1,14 @@
 import { Request, Response } from 'express';
-import teamService from '../services/teamService';
 import fixtureService from '../services/fixtureService';
 import accountService from '../services/accountService';
 import IFixture from '../interfaces/fixtureInterface';
 import { HttpException } from '../middlewares/HttpException';
 
 class fixtureController {
-    private teamService: teamService;
     private accountService: accountService;
     private fixtureService: fixtureService;
 
     constructor() {
-        this.teamService = new teamService();
         this.accountService = new accountService();
         this.fixtureService = new fixtureService();
     }

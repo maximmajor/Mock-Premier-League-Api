@@ -31,7 +31,7 @@ class accountService {
 
 
     public async login(email: string, password: string): Promise<string | null> {
-        const account: any = await this.accountRepository.findAccountByEmail(email);
+        const account = await this.accountRepository.findAccountByEmail(email);
         if (!account) {
             throw new HttpException(409, 'Account is not found');
         }
@@ -39,14 +39,14 @@ class accountService {
         if (!passwordMatch) {
             throw new HttpException(409, 'Invalid password');
         }
-        const token = jwt.sign({ userId: account._id }, 'secretWord' as Secret, {
+        const token: string = jwt.sign({ userId: account._id }, 'secretWord' as Secret, {
             expiresIn: '24h',
         });
         return token;
     }
 
-    public async getAuthAccount(userId: string): Promise<string | null> {
-        const user: any = await this.accountRepository.findAccountById(userId);
+    public async getAuthAccount(userId: string): Promise<IAccount | null> {
+        const user = await this.accountRepository.findAccountById(userId);
         if (!user) {
             throw new HttpException(409, 'Account is not');
         }
